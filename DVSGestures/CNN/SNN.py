@@ -16,7 +16,7 @@ def main():
         "cuda" if torch.cuda.is_available() else "cpu")
     print(config.device)
 
-    config.device_ids = range(torch.cuda.device_count())
+    config.device_ids = range(1)
     print(config.device_ids)
 
     config.name = 'SNN(CNN)-DVS-Gesture_dt=' + str(config.dt) + 'ms' + '_T=' +str(config.T)

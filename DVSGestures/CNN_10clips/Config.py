@@ -80,7 +80,7 @@ class configs(object):
         # Dataloader
         self.drop_last = False
         self.pip_memory = False
-        self.num_work = 4
+        self.num_work = 0
 
         # model
         self.model = None
