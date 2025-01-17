@@ -203,6 +203,7 @@ def create_datasets(root=None,
                     chunk_size_test=60,
                     ds=4,
                     dt=1000,
+                    input_polarity=2,
                     transform_train=None,
                     transform_test=None,
                     target_transform_train=None,
@@ -216,7 +217,7 @@ def create_datasets(root=None,
     if isinstance(ds, int):
         ds = [ds, ds]
 
-    size = [2, 128 // ds[0], 128 // ds[1]]
+    size = [input_polarity, 128 // ds[0], 128 // ds[1]]
 
     if n_events_attention is None:
         def default_transform():
@@ -252,8 +253,8 @@ def create_datasets(root=None,
                                     dt=dt,
                                     size=size,
                                     ds=ds,
-                                    is_spike = is_spike,
-                                    interval_scaling = interval_scaling,
+                                    is_spike=is_spike,
+                                    interval_scaling=interval_scaling,
                                     )
         return train_d
     else:
@@ -266,8 +267,8 @@ def create_datasets(root=None,
                                    dt=dt,
                                    size=size,
                                    ds=ds,
-                                   is_spike = is_spike,
-                                   interval_scaling = interval_scaling,
+                                   is_spike=is_spike,
+                                   interval_scaling=interval_scaling,
                                    )
         return test_d
 

@@ -12,6 +12,7 @@ import h5py
 import numpy as np
 import struct
 from DVSGestures.DVS_gesture_data_process.events_timeslices import *
+from new_create_hdf5 import my_create_hdf5
 
 
 
@@ -176,10 +177,13 @@ def datasets_process(path=None):
 
     else:
         print('DVS-Gestures')
-        untar(os.path.join(path, 'DvsGesture.tar.gz'), path)
+        # untar(os.path.join(path, 'DvsGesture.tar.gz'), path)
         create_hdf5(os.path.join(path, 'DvsGesture'), path)
 
-
 if __name__ == '__main__':
-    path = './'
-    datasets_process(path=path)
+    # path = './'
+    # datasets_process(path=path)
+
+    path = '/home/llm/Datasets/TICTS_for_paper/DVS128Gesture/feature_crct/results_original_speed/Tsout'
+    save_path = '/home/llm/projects/AttentionCode/TA-SNN/DVSGestures/data'
+    my_create_hdf5(path, save_path)

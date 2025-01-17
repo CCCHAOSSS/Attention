@@ -13,11 +13,11 @@ def main():
     config = configs()
 
     config.device = torch.device(
-        "cuda" if torch.cuda.is_available() else "cpu")
+        "cuda:3" if torch.cuda.is_available() else "cpu")
     print(config.device)
 
-    config.device_ids = range(1)
-    print(config.device_ids)
+    # config.device_ids = [3]
+    # print(config.device_ids)
 
     config.name = 'SNN(CNN)-DVS-Gesture_dt=' + str(config.dt) + 'ms' + '_T=' +str(config.T)
     config.modelNames = config.name + '.t7'

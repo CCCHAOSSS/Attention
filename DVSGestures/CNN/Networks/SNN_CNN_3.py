@@ -24,7 +24,7 @@ def create_net(config):
             return grad_output * temp.float() / (2 * config.lens)
 
     # cnn_layer(in_planes, out_planes, stride, padding, kernel_size)
-    cfg_cnn = [(2, 64, 1, 1, 3,),
+    cfg_cnn = [(config.in_channels, 64, 1, 1, 3,),
                (64, 128, 1, 1, 3,),
                (128, 128, 1, 1, 3,),
                ]
@@ -161,6 +161,6 @@ def create_net(config):
         patience=5,
         verbose=True
     )
-    config.model = nn.DataParallel(
-        config.model,
-        device_ids=config.device_ids)
+    # config.model = nn.DataParallel(
+    #     config.model,
+    #     device_ids=config.device_ids)

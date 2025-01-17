@@ -14,7 +14,7 @@ import struct
 from DVSGestures.DVS_gesture_data_process.events_timeslices import *
 
 
-def create_hdf5(path, save_path):
+def my_create_hdf5(path, save_path):
     """
 
     Args:
@@ -41,13 +41,17 @@ def create_hdf5(path, save_path):
     for lbl in range(n):
         sample_fold = os.path.join(train_path, str(lbl))
         for item in os.listdir(sample_fold):
-            events = io.loadmat(item, squeeze_me=True, struct_as_record=False)
+            print('.')
+            evs = os.path.join(sample_fold, item)
+            events = io.loadmat(evs, squeeze_me=True, struct_as_record=False)
             events['TSout'].ts = events['TSout'].ts - events['TSout'].ts[0]
             times = events['TSout'].ts
-
             x = events['TSout'].x - 1
             y = events['TSout'].y - 1
             p = events['TSout'].p
+            if min(p) > 0:
+                p = p - 1
+
             addrs = np.stack((x, y, p), axis=1).tolist()
 
             with h5py.File(save_path_train + os.sep + 'DVS-Gesture-train' + str(i) + '.hdf5',
@@ -75,13 +79,17 @@ def create_hdf5(path, save_path):
     for lbl in range(n):
         sample_fold = os.path.join(test_path, str(lbl))
         for item in os.listdir(sample_fold):
-            events = io.loadmat(item, squeeze_me=True, struct_as_record=False)
+            print('.')
+            evs = os.path.join(sample_fold, item)
+            events = io.loadmat(evs, squeeze_me=True, struct_as_record=False)
             events['TSout'].ts = events['TSout'].ts - events['TSout'].ts[0]
             times = events['TSout'].ts
 
             x = events['TSout'].x - 1
             y = events['TSout'].y - 1
             p = events['TSout'].p
+            if min(p) > 0:
+                p = p - 1
             addrs = np.stack((x, y, p), axis=1).tolist()
 
             with h5py.File(save_path_test + os.sep + 'DVS-Gesture-train' + str(i) + '.hdf5',

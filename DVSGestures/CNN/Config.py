@@ -4,7 +4,7 @@ import torch.nn as nn
 
 class configs(object):
     def __init__(self):
-        self.dt = 1
+        self.dt = 15
         self.T = 30
 
         #
@@ -18,15 +18,15 @@ class configs(object):
 
         # input
 
-        self.ds = 4
-        self.in_channels = 2
+        self.ds = 4   # 这个的作用是按ds比例缩小H和W
+        self.in_channels = 4
         self.im_width, self.im_height = (128 // self.ds, 128 // self.ds)
 
         # output
         self.target_size = 11
 
         # Data
-        self.clip = 1
+        self.clip = 30
         self.is_train_Enhanced = False
         self.is_spike = False
         self.interval_scaling = False
@@ -82,14 +82,14 @@ class configs(object):
         # Dataloader
         self.drop_last = False
         self.pip_memory = False
-        self.num_work = 4
+        self.num_work = 0
 
         # model
         self.model = None
         self.criterion = nn.MSELoss()
         self.optimizer = None
         self.device = None
-        self.device_ids = None
+        # self.device_ids = None
 
         self.best_acc = 0
         self.best_epoch = 0

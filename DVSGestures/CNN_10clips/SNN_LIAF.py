@@ -10,7 +10,7 @@ from DVSGestures.DVS_Gesture_utils.save import save_csv
 def main():
     config = configs()
     config.device = torch.device(
-        "cuda" if torch.cuda.is_available() else "cpu")
+        "cuda:3" if torch.cuda.is_available() else "cpu")
     print(config.device)
 
     config.device_ids = range(torch.cuda.device_count())
